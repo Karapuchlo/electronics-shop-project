@@ -16,6 +16,11 @@ def test_apply_discount():
 def test_get_total_inventory_value():
     assert Product.get_total_inventory_value() == 425000
 
-def test_name()
+def test_name():
     item1 = Product.products[0]
     assert item1.name != 'Смартфон'
+
+def test_string_to_number():
+    assert Product.string_to_number('5') == 5
+    assert Product.string_to_number('5.0') == 5
+    assert Product.string_to_number('5.5') != 5

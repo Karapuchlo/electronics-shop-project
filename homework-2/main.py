@@ -69,6 +69,3 @@ if __name__ == "__main__":
     Product.instantiate_from_csv()  # создание объектов из данных файла
 
     assert len(Product.products) == 9  # в файле 9 записей с данными по товарам
-
-    item1 = Product.products[0]
-    assert item1.name != 'Смартфон'
