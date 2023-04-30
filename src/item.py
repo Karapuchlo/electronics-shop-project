@@ -1,30 +1,40 @@
-class Item:
-    """
-    Класс для представления товара в магазине.
-    """
-    pay_rate = 1.0
-    all = []
+class Product:
+  price_level = 1.0
+  products = []
 
-    def __init__(self, name: str, price: float, quantity: int) -> None:
-        """
-        Создание экземпляра класса item.
+  def __init__(self, name, price, quantity):
+    self.name = name
+    self.price = price
+    self.quantity = quantity
+    self.__class__.products.append(self)
 
-        :param name: Название товара.
-        :param price: Цена за единицу товара.
-        :param quantity: Количество товара в магазине.
-        """
-        pass
+  @property
+  def name(self):
+      return self._name
 
-    def calculate_total_price(self) -> float:
-        """
-        Рассчитывает общую стоимость конкретного товара в магазине.
+  @name.setter
+  def name(self, value):
+    if len(value) <= 10:
+      self._name = value
+    else:
+      print('Длина наименования товара превышает 10 символов.')
 
-        :return: Общая стоимость товара.
-        """
-        pass
+  @classmethod
+  def instantiate_from_csv(cls):
+    with open('/src/item.csv', 'r') as f:
+      for line in f:
+        name, price, quantity = line.strip().split(',')
+        item = cls(name, price, quantity)
 
-    def apply_discount(self) -> None:
-        """
-        Применяет установленную скидку для конкретного товара.
-        """
-        pass
+  @staticmethod
+  def string_to_number(string):
+    return float(string)
+
+  @classmethod
+  def get_total_inventory_value(self):
+    return sum([product.quantity * product.price * self.price_level for product in self.products])
+  def get_total_price(self):
+      return self.quantity * self.price * self.price_level
+
+  def apply_discount(self):
+     self.price *= self.price_level
