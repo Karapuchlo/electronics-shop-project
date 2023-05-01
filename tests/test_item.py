@@ -18,3 +18,11 @@ def test_apply_discount():
 
 def test_get_total_inventory_value():
     assert Product.get_total_inventory_value() == 410000
+
+def test_instantiate_from_csv():
+    assert len(Product.products) == 3
+
+def test_string_to_number():
+    assert Product.string_to_number('5') == 5
+    assert Product.string_to_number('5.0') == 5
+    assert Product.string_to_number('5.5') == 5.5

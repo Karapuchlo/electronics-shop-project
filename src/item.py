@@ -29,12 +29,12 @@ class Product:
   @classmethod
   def instantiate_from_csv(cls):
     cls.products = []
-    with open('../src/item.csv', 'r') as csvfile:
+    with open('../src/items.csv', 'r') as csvfile:
       reader = csv.reader(csvfile)
       #next(reader)  # пропускаем заголовок
       for row in reader:
-        name, price = row
-        item = Product(name, price)
+        name, price, quantity = row
+        item = Product(name, price, quantity)
         cls.products.append(item)
 
   @staticmethod
