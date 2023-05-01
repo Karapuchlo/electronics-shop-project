@@ -8,6 +8,12 @@ class Product:
     self.quantity = quantity
     self.__class__.products.append(self)
 
+  def __str__(self):
+    return f"{self.name} - {self.price}"
+
+  def __repr__(self):
+    return f"Item({self.name}, {self.price})"
+
   @property
   def name(self):
       return self._name
