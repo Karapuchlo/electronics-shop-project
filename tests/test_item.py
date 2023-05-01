@@ -1,8 +1,9 @@
 import pytest
-from main import Product
+from src.item import Product
 
 def test_name():
-    assert False
+    item1 = Product.products[0]
+    assert item1.name == 'Смартфон'
 
 def test_get_total_price():
     product1 = Product("Телевизор", 30000, 10)
@@ -16,4 +17,4 @@ def test_apply_discount():
     assert product2.get_total_price() == 100000
 
 def test_get_total_inventory_value():
-    assert Product.get_total_inventory_value() == 425000
+    assert Product.get_total_inventory_value() == 400000

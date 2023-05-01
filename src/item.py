@@ -1,3 +1,4 @@
+import csv
 class Product:
   price_level = 1.0
   products = []
@@ -27,10 +28,14 @@ class Product:
 
   @classmethod
   def instantiate_from_csv(cls):
-    with open('/src/item.csv', 'r') as f:
-      for line in f:
-        name, price, quantity = line.strip().split(',')
-        item = cls(name, price, quantity)
+    cls.products = []
+    with open('../src/item.csv', 'r') as csvfile:
+      reader = csv.reader(csvfile)
+      #next(reader)  # пропускаем заголовок
+      for row in reader:
+        name, price = row
+        item = Product(name, price)
+        products.append(item)
 
   @staticmethod
   def string_to_number(string):
@@ -38,9 +43,9 @@ class Product:
 
   @classmethod
   def get_total_inventory_value(self):
-    return sum([product.quantity * product.price * self.price_level for product in self.products])
+    return sum([product.quantity * product.price for product in self.products])
   def get_total_price(self):
-      return self.quantity * self.price * self.price_level
+    return self.quantity * self.price
 
   def apply_discount(self):
      self.price *= self.price_level
