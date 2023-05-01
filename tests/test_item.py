@@ -26,3 +26,4 @@ def test_string_to_number():
     assert Product.string_to_number('5') == 5
     assert Product.string_to_number('5.0') == 5
     assert Product.string_to_number('5.5') == 5.5
+
