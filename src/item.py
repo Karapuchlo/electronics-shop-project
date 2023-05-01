@@ -35,7 +35,7 @@ class Product:
       for row in reader:
         name, price = row
         item = Product(name, price)
-        products.append(item)
+        cls.products.append(item)
 
   @staticmethod
   def string_to_number(string):
