@@ -31,15 +31,18 @@ class Product:
     cls.products = []
     with open('../src/items.csv', 'r') as csvfile:
       reader = csv.reader(csvfile)
-      #next(reader)  # пропускаем заголовок
+      next(reader)  # пропускаем заголовок
       for row in reader:
         name, price, quantity = row
         item = Product(name, price, quantity)
-        cls.products.append(item)
+        #cls.products.append(item)
 
   @staticmethod
   def string_to_number(string):
-    return float(string)
+    if '.' in string:
+      return int(float(string))
+    else:
+      return int(string)
 
   @classmethod
   def get_total_inventory_value(self):
