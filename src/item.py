@@ -56,8 +56,8 @@ class Product:
   def __add__(self, other):
     if type(other) == type(self):
       return Product(self.name, self.price, self.quantity + other.quantity)
-    elif isinstance(other, Product):
-      return Product(other.name, other.price, other.quantity + self.quantity)
+    elif isinstance(other, Phone):
+      return Phone(other.name, other.price, other.quantity + self.quantity, other.num_sim)
     else:
       raise TypeError(
         "Unsupported operand type(s) for +: '{}' and '{}'".format(type(self).__name__, type(other).__name__))
