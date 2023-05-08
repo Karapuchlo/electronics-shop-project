@@ -10,7 +10,7 @@ class Product:
     self.__class__.products.append(self)
 
   def __str__(self):
-    return f"{self.name}"
+    return f"{self.name}: {self.price} x {self.quantity}"
 
   def __repr__(self):
     return f"{self.__class__.__name__}('{self.name}', {self.price}, {self.quantity})"
@@ -56,8 +56,7 @@ class Product:
   def __add__(self, other):
     if type(other) == type(self):
       return Product(self.name, self.price, self.quantity + other.quantity)
-    elif isinstance(other, Phone):
-      return Phone(other.name, other.price, other.quantity + self.quantity, other.num_sim)
+    elif isinstance(other, Product):
+      return Product(other.name, other.price, self.quantity + other.quantity)
     else:
-      raise TypeError(
-        "Unsupported operand type(s) for +: '{}' and '{}'".format(type(self).__name__, type(other).__name__))
+      raise TypeError(f"unsupported operand type(s) for +: '{type(self)}' and '{type(other)}'")
