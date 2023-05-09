@@ -1,20 +1,19 @@
 from src.item import Product
 # миксин, содержащий логику для работы с языком
-class KeyboardMixin:
-    LANGUAGES = ['EN', 'RU']
+class LanguageMixin:
+    def __init__(self):
+        self._language = 'EN'
 
-    def __init__(self, name, price, language='EN'):
-        self._language = language
-        super().__init__(name)
-        self.price = price
-
-    def change_lang(self, lang):
-        if lang in self.LANGUAGES:
-            self._language = lang
+    def change_lang(self, new_lang):
+        if new_lang in ('EN', 'RU'):
+            self._language = new_lang
+            print(f'Keyboard language changed to {new_lang}.')
         else:
-            raise ValueError(f"Language {lang} is not supported")
+            print(f'Unsupported language {new_lang}.')
 
-class KeyBoard(Product, KeyboardMixin):
-    def __init__(self, name, price, language='EN'):
-        self.price = price
-        super().__init__(name=name, language=language)
+class KeyBoard(Product, LanguageMixin):
+    def __init__(self, _name, price, quantity):
+        super().__init__(_name, price, quantity)
+
+    def get_description(self):
+        return f'{self._name}'
