@@ -17,12 +17,12 @@ class Product:
 
   @property
   def name(self):
-      return self._name
+      return self.__name
 
   @name.setter
   def name(self, value):
     if len(value) <= 10:
-      self._name = value
+      self.__name = value
     else:
       print('Длина наименования товара превышает 10 символов.')
 
