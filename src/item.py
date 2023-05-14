@@ -4,13 +4,13 @@ class Product:
   products = []
 
   def __init__(self, name, price, quantity):
-    self.name = name
+    self.__name = name
     self.price = price
     self.quantity = quantity
     self.__class__.products.append(self)
 
   def __str__(self):
-    return f"{self.name}: {self.price} x {self.quantity}"
+    return f"{self.name}"
 
   def __repr__(self):
     return f"{self.__class__.__name__}('{self.name}', {self.price}, {self.quantity})"
