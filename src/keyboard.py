@@ -4,14 +4,17 @@ class LanguageMixin:
     layouts = ['EN', 'RU']
     current_layout = 0
     def __init__(self):
-        self.language = 'EN'
+        self.__language = 'EN'
 
+    @property
+    def language(self):
+        return self.__language
     def change_lang(self):
         if self.current_layout >= 1:
             self.current_layout = (self.current_layout - 1)
         else:
             self.current_layout = (self.current_layout + 1)
-        self.language = self.layouts[self.current_layout]
+        self.__language = self.layouts[self.current_layout]
         print(f'Keyboard language changed to {self.layouts[self.current_layout]}')
 
     #@layouts.setter
@@ -24,4 +27,4 @@ class KeyBoard(Product, LanguageMixin):
         super().__init__(_name, price, quantity)
         LanguageMixin.__init__(self)
     def get_description(self):
-        return f'{self._name}'
+        return f'{self.__name}'
