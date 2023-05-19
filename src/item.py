@@ -1,4 +1,8 @@
 import csv
+
+
+class InstantiateCSVError(Exception):
+  pass
 class Product:
   price_level = 1.0
   products = []
@@ -29,12 +33,24 @@ class Product:
   @classmethod
   def instantiate_from_csv(cls):
     cls.products = []
-    with open('../src/items.csv', 'r') as csvfile:
-      reader = csv.reader(csvfile)
-      next(reader)  # пропускаем заголовок
-      for row in reader:
-        name, price, quantity = row
-        item = Product(name, price, quantity)
+    try:
+      with open('../src/items.csv', 'r') as csvfile:
+        reader = csv.reader(csvfile)
+        next(reader)  # пропускаем заголовок
+        for row in reader:
+          name, price, quantity = row
+          item = Product(name, price, quantity)
+    except FileNotFoundError:
+          raise FileNotFoundError('Отсутствует файл item.csv')
+    except AttributeError:
+      print("Error: Item class does not have the necessary attributes.")
+    except ValueError:
+      print("Error: Invalid data in CSV file.")
+    except IndexError:
+      print("File item.csv is corrupted.")
+    except Exception as e:
+      print(f"Unexpected error: {e}")
+      raise InstantiateCSVError("Error instantiating items from CSV file.") from e
         #cls.products.append(item)
 
   @staticmethod
